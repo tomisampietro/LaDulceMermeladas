@@ -1,0 +1,338 @@
+/* ------------------------------------------------------------------
+   La Dulce Mermeladas — custom styles on top of Tailwind
+------------------------------------------------------------------ */
+
+:root {
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ------------------------------------------------------------------
+   Nav
+------------------------------------------------------------------ */
+#nav.is-scrolled {
+  background: rgba(247, 241, 232, 0.85);
+  backdrop-filter: saturate(140%) blur(14px);
+  -webkit-backdrop-filter: saturate(140%) blur(14px);
+  border-bottom: 1px solid rgba(26, 13, 10, 0.08);
+}
+
+.nav-link {
+  position: relative;
+  color: rgba(26, 13, 10, 0.75);
+  transition: color 0.3s var(--ease-out-soft);
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  height: 1px;
+  width: 0;
+  background: #7a1f25;
+  transition: width 0.4s var(--ease-out-soft);
+}
+.nav-link:hover {
+  color: #7a1f25;
+}
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ------------------------------------------------------------------
+   Reveal-on-scroll
+------------------------------------------------------------------ */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 1s var(--ease-out-soft),
+    transform 1s var(--ease-out-soft);
+  will-change: opacity, transform;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Marquee
+------------------------------------------------------------------ */
+.marquee {
+  animation: marquee 38s linear infinite;
+}
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ------------------------------------------------------------------
+   Product cards
+------------------------------------------------------------------ */
+.product-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #f7f1e8;
+  border: 1px solid rgba(26, 13, 10, 0.06);
+  transition:
+    transform 0.6s var(--ease-out-soft),
+    box-shadow 0.6s var(--ease-out-soft);
+}
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -30px rgba(26, 13, 10, 0.25);
+}
+.product-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.product-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 80% at 50% 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+}
+.product-card__tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 2;
+  display: inline-flex;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(247, 241, 232, 0.9);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #1a0d0a;
+}
+.product-card__body {
+  padding: 24px 24px 28px;
+}
+
+.card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #1a0d0a;
+  color: #f7f1e8;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  transition: background 0.3s var(--ease-out-soft);
+}
+.card-btn:hover {
+  background: #7a1f25;
+}
+
+/* ------------------------------------------------------------------
+   Process steps
+------------------------------------------------------------------ */
+.step-dot {
+  position: absolute;
+  left: -33px;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: #b06a3b;
+  box-shadow: 0 0 0 4px rgba(176, 106, 59, 0.18);
+}
+
+/* ------------------------------------------------------------------
+   Testimonials
+------------------------------------------------------------------ */
+.testimonial {
+  padding: 32px;
+  border-radius: 24px;
+  background: #efe6d5;
+  border: 1px solid rgba(26, 13, 10, 0.05);
+  transition: transform 0.5s var(--ease-out-soft);
+}
+.testimonial:hover {
+  transform: translateY(-4px);
+}
+
+/* ------------------------------------------------------------------
+   Gallery
+------------------------------------------------------------------ */
+.gallery-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+}
+.gallery-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.4s var(--ease-out-soft);
+}
+.gallery-tile:hover img {
+  transform: scale(1.08);
+}
+
+/* ------------------------------------------------------------------
+   Pack cards (primary CTA section)
+------------------------------------------------------------------ */
+.pack-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 24px;
+  background: #f7f1e8;
+  border: 1px solid rgba(26, 13, 10, 0.08);
+  transition:
+    transform 0.5s var(--ease-out-soft),
+    box-shadow 0.5s var(--ease-out-soft);
+}
+.pack-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 60px -30px rgba(26, 13, 10, 0.3);
+}
+.pack-card__media {
+  aspect-ratio: 16 / 9;
+  position: relative;
+}
+.pack-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 80% at 50% 0%, transparent 60%, rgba(0, 0, 0, 0.18) 100%);
+}
+.pack-btn {
+  display: inline-flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border-radius: 999px;
+  color: #f7f1e8;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  transition: background 0.3s var(--ease-out-soft);
+}
+
+/* ------------------------------------------------------------------
+   Flavor cards (individual jars — compact buy grid)
+------------------------------------------------------------------ */
+.flavor-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #f7f1e8;
+  border: 1px solid rgba(26, 13, 10, 0.06);
+  transition:
+    transform 0.4s var(--ease-out-soft),
+    border-color 0.4s var(--ease-out-soft);
+}
+.flavor-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(122, 31, 37, 0.4);
+}
+.flavor-card__media {
+  aspect-ratio: 5 / 3;
+  position: relative;
+}
+.flavor-card__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 80% at 50% 0%, transparent 55%, rgba(0, 0, 0, 0.2) 100%);
+}
+.flavor-card__body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.flavor-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #1a0d0a;
+  color: #f7f1e8;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: background 0.3s var(--ease-out-soft);
+}
+.flavor-btn:hover {
+  background: #7a1f25;
+}
+
+/* ------------------------------------------------------------------
+   Footer
+------------------------------------------------------------------ */
+.footer-link {
+  transition: color 0.3s var(--ease-out-soft);
+}
+.footer-link:hover {
+  color: #f7f1e8;
+}
+
+/* ------------------------------------------------------------------
+   Parallax
+------------------------------------------------------------------ */
+[data-parallax] {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+/* ------------------------------------------------------------------
+   Floating WhatsApp button — pulso sutil para llamar la atención
+------------------------------------------------------------------ */
+@keyframes wa-pulse {
+  0%, 100% {
+    box-shadow: 0 12px 28px -8px rgba(37, 211, 102, 0.6),
+                0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  50% {
+    box-shadow: 0 12px 28px -8px rgba(37, 211, 102, 0.6),
+                0 0 0 14px rgba(37, 211, 102, 0);
+  }
+}
+a[aria-label="Chatear por WhatsApp"].fixed {
+  animation: wa-pulse 2.4s var(--ease-out-soft) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  a[aria-label="Chatear por WhatsApp"].fixed {
+    animation: none;
+  }
+}
